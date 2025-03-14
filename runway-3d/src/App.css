@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #000000;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Remove default styles */
+.App-logo {
+  display: none;
+}
+
+.App-header {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  z-index: 10;
+}
+
+.model-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 2px;
+  max-width: 300px;
+  text-align: center;
+  z-index: 10;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+  z-index: 10;
+}
+
+.title {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 42px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.subtitle {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: white;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.model-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.model-info p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0.8;
+}
