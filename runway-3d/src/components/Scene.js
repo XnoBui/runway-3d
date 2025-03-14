@@ -6,45 +6,47 @@ function createParametricStructures() {
   const structures = [];
   
   // Create central runway - 5 times thicker
-  const runwayGeometry = new THREE.BoxGeometry(100, 2.5, 6);
+  const runwayGeometry = new THREE.BoxGeometry(100, 8, 6);
   const runway = {
     geometry: runwayGeometry,
-    position: [0, 6.25, 0],
+    position: [0, 4, 0],
     rotation: [0, 0, 0],
     type: 'runway'
   };
   structures.push(runway);
 
-  // Create left structures - increased spread and density on left side
-  for (let i = 0; i < 20; i++) { // Increased from 15 to 20
-    const width = 5 + Math.random() * 15;
+  // Create central structures
+  for (let i = 0; i < 5; i++) {
+    const width = 8 + Math.random() * 12;
     const height = 0.2;
-    const depth = 1 + Math.random() * 3;
+    const depth = 2 + Math.random() * 4;
     
     const geometry = new THREE.BoxGeometry(width, height, depth);
+    // Alternate between left and right side of runway, further away
+    const side = i % 2 === 0 ? -1 : 1;
     const position = [
-      -25 - Math.random() * 15, // Moved further left and increased spread
-      2 + i * 2,
-      -30 + Math.random() * 60 // Increased z-range for more depth
+      -20 + i * 10, // Space them evenly along the runway
+      8 + i * 2, // Stack them slightly higher
+      12 * side // Position them 12 units away from the runway
     ];
     const rotation = [
-      Math.random() * Math.PI * 0.2,
-      Math.random() * Math.PI * 0.2,
-      Math.random() * Math.PI * 0.5
+      Math.random() * Math.PI * 0.5, // Increased from 0.1 to 0.5 for more rotation on X axis
+      Math.random() * Math.PI * 0.5, // Increased from 0.1 to 0.5 for more rotation on Y axis
+      Math.random() * Math.PI * 0.5  // Increased from 0.2 to 0.5 for more rotation on Z axis
     ];
     
-    structures.push({ geometry, position, rotation, type: 'structure' });
+    structures.push({ geometry, position, rotation, type: 'central' });
   }
 
-  // Create right structures - reduced density
-  for (let i = 0; i < 10; i++) { // Reduced from 15 to 10
+  // Create left structures - balanced spread
+  for (let i = 0; i < 15; i++) {
     const width = 5 + Math.random() * 15;
     const height = 0.2;
     const depth = 1 + Math.random() * 3;
     
     const geometry = new THREE.BoxGeometry(width, height, depth);
     const position = [
-      15 + Math.random() * 10,
+      -20 - Math.random() * 20,
       2 + i * 2,
       -20 + Math.random() * 40
     ];
@@ -57,15 +59,36 @@ function createParametricStructures() {
     structures.push({ geometry, position, rotation, type: 'structure' });
   }
 
-  // Create overhead structures - more concentrated on left
-  for (let i = 0; i < 30; i++) {
+  // Create right structures - balanced with left
+  for (let i = 0; i < 15; i++) {
+    const width = 5 + Math.random() * 15;
+    const height = 0.2;
+    const depth = 1 + Math.random() * 3;
+    
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const position = [
+      20 + Math.random() * 20,
+      2 + i * 2,
+      -20 + Math.random() * 40
+    ];
+    const rotation = [
+      Math.random() * Math.PI * 0.2,
+      Math.random() * Math.PI * 0.2,
+      Math.random() * Math.PI * 0.5
+    ];
+    
+    structures.push({ geometry, position, rotation, type: 'structure' });
+  }
+
+  // Create overhead structures - balanced distribution
+  for (let i = 0; i < 20; i++) {
     const length = 20 + Math.random() * 40;
     const width = 0.2;
     const height = 0.1;
     
     const geometry = new THREE.BoxGeometry(length, height, width);
     const position = [
-      -40 + Math.random() * 70, // Shifted range to favor left side
+      -30 + Math.random() * 60,
       20 + Math.random() * 20,
       -20 + Math.random() * 40
     ];
@@ -78,15 +101,15 @@ function createParametricStructures() {
     structures.push({ geometry, position, rotation, type: 'overhead' });
   }
 
-  // Create underground structures - more concentrated on left
-  for (let i = 0; i < 30; i++) {
+  // Create underground structures - balanced distribution
+  for (let i = 0; i < 20; i++) {
     const length = 20 + Math.random() * 40;
     const width = 0.2;
     const height = 0.1;
     
     const geometry = new THREE.BoxGeometry(length, height, width);
     const position = [
-      -40 + Math.random() * 70, // Shifted range to favor left side
+      -30 + Math.random() * 60,
       -10 - Math.random() * 20,
       -20 + Math.random() * 40
     ];
@@ -99,14 +122,14 @@ function createParametricStructures() {
     structures.push({ geometry, position, rotation, type: 'underground' });
   }
 
-  // Create diagonal connecting structures - more on left side
-  for (let i = 0; i < 20; i++) { // Increased from 15 to 20
+  // Create diagonal connecting structures - balanced distribution
+  for (let i = 0; i < 15; i++) {
     const height = 15 + Math.random() * 10;
     const width = 0.1;
     
     const geometry = new THREE.CylinderGeometry(width, width, height, 6);
     const position = [
-      -40 + Math.random() * 70, // Shifted range to favor left side
+      -30 + Math.random() * 60,
       -5 + height/2,
       -20 + Math.random() * 40
     ];
@@ -119,14 +142,14 @@ function createParametricStructures() {
     structures.push({ geometry, position, rotation, type: 'connector' });
   }
 
-  // Create vertical struts - more concentrated on left
-  for (let i = 0; i < 20; i++) {
+  // Create vertical struts - balanced distribution
+  for (let i = 0; i < 15; i++) {
     const height = 10 + Math.random() * 30;
     const width = 0.1;
     
     const geometry = new THREE.CylinderGeometry(width, width, height, 6);
     const position = [
-      -50 + i * 4, // Start further left
+      -40 + i * 5,
       5 + height/2,
       -2 + Math.random() * 4
     ];
@@ -178,11 +201,11 @@ function SimpleModel({ onSelect }) {
     const x = -45 + walkProgress.current * 90;
     group.current.position.x = x;
     
-    // Add more subtle bobbing motion - adjusted height for thicker runway
-    group.current.position.y = 7.5 + Math.sin(state.clock.elapsedTime * 2) * 0.05;
+    // Add more subtle bobbing motion - adjusted height for new runway position
+    group.current.position.y = 8 + Math.sin(state.clock.elapsedTime * 2) * 0.05; // Adjusted to be on runway surface
 
     // Slower leg movement for graceful walk
-    const legRotation = Math.sin(state.clock.elapsedTime * 2) * 0.2; // Reduced frequency and angle
+    const legRotation = Math.sin(state.clock.elapsedTime * 2) * 0.2;
     group.current.children.forEach((child, index) => {
       if (child.name === 'leg') {
         child.rotation.x = legRotation * (index === 0 ? 1 : -1);
@@ -198,7 +221,7 @@ function SimpleModel({ onSelect }) {
   return (
     <group 
       ref={group} 
-      position={[0, 7.5, 0]}
+      position={[0, 8, 0]} // Adjusted initial position to be on runway surface
       rotation={[0, -Math.PI / 2, 0]}
       onClick={handleClick}
     >
@@ -245,18 +268,31 @@ function ParametricStructure({ geometry, position, rotation, type }) {
     if (type === 'runway') {
       return new THREE.MeshStandardMaterial({
         color: 0xffffff,
-        roughness: 0.3,
-        metalness: 0.2
+        roughness: 0.2,
+        metalness: 0.3,
+        clearcoat: 0.5,
+        clearcoatRoughness: 0.2
+      });
+    }
+    if (type === 'central') {
+      return new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        roughness: 0.2,
+        metalness: 0.4,
+        transmission: 0.2,
+        transparent: true,
+        clearcoat: 0.9,
+        clearcoatRoughness: 0.1
       });
     }
     return new THREE.MeshPhysicalMaterial({
       color: 0xffffff,
-      roughness: 0.2,
-      metalness: 0.1,
-      transmission: ['overhead', 'underground'].includes(type) ? 0.5 : 0,
+      roughness: 0.3,
+      metalness: 0.2,
+      transmission: ['overhead', 'underground'].includes(type) ? 0.3 : 0,
       transparent: ['overhead', 'underground'].includes(type),
-      clearcoat: 1,
-      clearcoatRoughness: 0.1
+      clearcoat: 0.8,
+      clearcoatRoughness: 0.2
     });
   }, [type]);
 
@@ -303,22 +339,23 @@ function Scene({ onModelSelect }) {
         penumbra={0.1}
         decay={1.5}
         distance={100}
-        intensity={1}
+        intensity={1.5}
         castShadow
       />
+      
       <spotLight
         position={[-20, 20, -10]}
         angle={Math.PI / 8}
         penumbra={0.2}
         decay={1.5}
         distance={80}
-        intensity={0.8}
+        intensity={1}
         castShadow
       />
       
       {/* Add point lights for additional highlights */}
-      <pointLight position={[0, 15, 2]} intensity={0.5} />
-      <pointLight position={[0, 15, -2]} intensity={0.5} />
+      <pointLight position={[0, 15, 2]} intensity={0.8} />
+      <pointLight position={[0, 15, -2]} intensity={0.8} />
     </group>
   );
 }

@@ -28,8 +28,8 @@ function App() {
       
       <Canvas
         camera={{ 
-          position: [0, 25, 60], 
-          fov: 60,
+          position: [-40, 45, 0],
+          fov: 40,
           near: 0.1,
           far: 1000
         }}
@@ -37,16 +37,17 @@ function App() {
         shadows
       >
         <color attach="background" args={['#000000']} />
-        <fog attach="fog" args={['#000000', 30, 100]} />
+        <fog attach="fog" args={['#000000', 50, 150]} />
         
         {/* Lighting */}
-        <ambientLight intensity={0.4} />
+        <ambientLight intensity={0.6} />
         <directionalLight 
-          position={[5, 10, 7]} 
-          intensity={0.8}
+          position={[5, 80, 5]} 
+          intensity={1.5}
           castShadow
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
+          shadow-camera-far={1000}
         />
 
         {/* Main Scene */}
@@ -54,14 +55,15 @@ function App() {
         
         {/* Controls */}
         <OrbitControls 
-          enablePan={true}
-          minDistance={20}
-          maxDistance={100}
-          minPolarAngle={Math.PI / 6}
-          maxPolarAngle={Math.PI / 2.2}
-          target={[0, 10, 0]}
-          enableDamping={true}
+          target={[0, 12, 0]}
+          enableDamping
           dampingFactor={0.05}
+          minDistance={25}
+          maxDistance={120}
+          minPolarAngle={Math.PI / 2.5}
+          maxPolarAngle={Math.PI / 1.6}
+          enablePan={true}
+          panSpeed={0.5}
         />
         
         {/* Environment */}
