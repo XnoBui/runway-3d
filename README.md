@@ -1,14 +1,14 @@
-# Runway 3D
+# 3D Runway Environment
 
-A parametric fashion runway visualization built with React Three Fiber. This project creates an immersive 3D environment for showcasing fashion runway designs.
+A React and Three.js-based 3D environment featuring organic, Zaha Hadid-inspired shapes forming a dynamic runway. The project showcases fluid, parametric architecture with interactive viewing capabilities.
 
 ## Features
 
-- Interactive 3D runway environment
-- Adjustable camera angles and positions
-- Dynamic lighting system
-- Customizable runway dimensions and materials
-- Smooth orbit controls for viewing
+- Organic, flowing shapes inspired by Zaha Hadid's architectural style
+- Dynamic animations and subtle movements
+- High-contrast lighting with metallic materials
+- Interactive camera controls for 360° viewing
+- Responsive design
 
 ## Technologies Used
 
@@ -30,14 +30,12 @@ A parametric fashion runway visualization built with React Three Fiber. This pro
    ```
 4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
 
-## Development
+## Controls
 
-The project uses React Three Fiber for 3D rendering and React for the UI components. The main components are:
-
-- `App.js`: Main application component with scene setup
-- `Scene.js`: 3D scene configuration with runway and lighting
-- Additional components for specific features
+- Orbit: Left mouse button drag
+- Zoom: Mouse wheel
+- The camera is constrained to maintain optimal viewing angles
 
 ## License
 
-MIT 
+MIT
