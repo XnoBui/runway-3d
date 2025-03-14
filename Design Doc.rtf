@@ -1,0 +1,89 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Thank you for sharing the UI example! This gives a great sense of the aesthetic and vibe you're aiming for. The image shows a futuristic, abstract runway with floating geometric shapes, a bold "Walking on Mars" title, and a minimalistic, high-contrast design. The tagline \'93SKP-S A \'97\'97 W2021 NEW ARRIVALS \'97\'97 LOOKBOOK\'94 suggests this is for a fashion brand or collection launch, possibly with a sci-fi or Martian theme. I\'92ll refine the Design Document to align with this inspiration while keeping your requirements for interactivity (3D runway, 360-degree model rotation, zoom, and detail inspection).\
+\
+Here\'92s the updated Design Document in Markdown format:\
+\
+---\
+\
+# Design Document: 3D Floating Fashion Runway Landing Page - "Walking on Mars"\
+\
+## 1. Overview\
+### 1.1 Purpose\
+- **What problem does this project solve?**  \
+  To provide an interactive, engaging way for users to explore a virtual fashion runway, in a dynamic 3D environment, mimicking a real-world fashion show experience but in a new way, the runway floating in the air, there are 3-4 models walking on the runway.\
+- **Who is the target audience?**  \
+  Fashion-forward individuals, sci-fi enthusiasts, and brands aiming to promote collections with a futuristic, otherworldly twist.\
+\
+### 1.2 Scope\
+- **High-level goals:**  \
+  Build a single-page landing site with a 3D floating runway inspired by a Martian landscape, featuring 3-4 interactive models walking, with rotation, zoom, and detail inspection capabilities.  \
+- **Out of scope:**  \
+  Direct purchasing functionality or live-streaming features for version 1.\
+\
+## 2. Features\
+- **Core Features:**  \
+  - A floating 3D runway made of abstract, geometric shapes (inspired by the UI example).  \
+  - 3-4 models walking in a loop, dressed in futuristic fashion.  \
+  - 360-degree rotation of individual models using mouse/touch controls.  \
+  - Zoom in/out to inspect clothing details (e.g., textures, stitching).  \
+  - Clickable hotspots on models for pop-up details (e.g., \'93Martian-inspired reflective fabric\'94).  \
+- **Stretch Goals:**  \
+  - Subtle animations (e.g., floating dust particles to mimic Mars).  \
+  - Interactive \'93Explore\'94 button to trigger a guided tour of the runway.\
+\
+## 3. User Interface (UI)\
+- **Main Sections:**  \
+  - **Runway View:** Full-screen 3D scene of a floating runway with abstract, fragmented geometric shapes (like in the UI example), with 3-4 models walking.  \
+  - **Controls:** Minimal overlay UI (zoom slider, rotation prompt, detail pop-ups).  \
+  - **Branding & Text:**  \
+    - Top-left: Brand logo (e.g., the circular \'93S\'94 logo from the UI).  \
+    - Center-left: Bold title \'93Walking on Mars\'94 in a futuristic font.  \
+    - Bottom: Tagline \'93SKP-S A \'97\'97 W2021 NEW ARRIVALS \'97\'97 LOOKBOOK\'94.  \
+    - Top-right: \'93Explore\'94 button with a sleek arrow (e.g., \'93EXPLORE \uc0\u8594 \'94).  \
+- **Design Style:**  \
+  High-contrast, minimalist, and futuristic\'97light gray background with dark gray runway elements, accented by glowing reds or oranges to evoke a Martian vibe.\
+\
+## 4. Technical Design\
+### 4.1 Architecture\
+- **Frontend:**  \
+  - HTML5, CSS3, JavaScript.  \
+  - Three.js for 3D rendering of the floating runway and models.  \
+- **3D Assets:**  \
+  - Custom runway: Abstract geometric shapes (e.g., fragmented cubes, slabs) with a rough, rocky texture.  \
+  - 3-4 animated models with walking cycles (e.g., sourced from Mixamo, customized in Blender).  \
+  - Clothing textures: Futuristic designs (e.g., metallic fabrics, reflective surfaces).  \
+- **Hosting:** Static site on Netlify or Vercel, with optimized assets for fast loading.\
+\
+### 4.2 Tools & Technologies\
+- **Languages:** HTML, CSS, JavaScript (ES6).  \
+- **Frameworks/Libraries:**  \
+  - Three.js for 3D rendering.  \
+  - GSAP for text animations (e.g., fading in \'93Walking on Mars\'94).  \
+- **Tools:**  \
+  - Blender for runway design and clothing textures.  \
+  - Git for version control.  \
+  - Vite for development and asset bundling.\
+\
+## 5. Milestones\
+- **Phase 1:** Set up landing page and Three.js with a basic floating runway (geometric shapes) \'96 4 days.  \
+- **Phase 2:** Add 3-4 walking models with rotation/zoom controls \'96 5 days.  \
+- **Phase 3:** Implement hotspots, detail pop-ups, and UI text (e.g., \'93Walking on Mars\'94) \'96 3 days.  \
+- **Phase 4:** Add final touches (e.g., Martian effects, text animations) and deploy \'96 2 days.\
+\
+## 6. Risks & Challenges\
+- Ensuring the abstract runway design doesn\'92t overwhelm the models or distract users.  \
+- Optimizing 3D rendering for smooth performance with multiple models on mobile devices.  \
+- Creating or sourcing clothing designs that match the \'93Walking on Mars\'94 theme.\
+\
+## 7. Open Questions\
+- Should the runway shapes animate slightly (e.g., subtle floating motion)?  \
+- Do you want a specific Martian background (e.g., red desert, starry sky)?  \
+- Are the models walking in a straight line or following a more dynamic path?  \
+- Any specific fashion style for the clothing (e.g., space suits, avant-garde, cyberpunk)?\
+}
