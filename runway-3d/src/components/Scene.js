@@ -6,49 +6,52 @@ function createParametricStructures() {
   const structures = [];
   
   // Create central runway - balanced position
-  const runwayGeometry = new THREE.BoxGeometry(100, 8, 6);
+  const runwayGeometry = new THREE.BoxGeometry(150, 10, 3); // Reduced width to 10, increased thickness to 3
   const runway = {
     geometry: runwayGeometry,
-    position: [0, 4, 0], // Lowered from 12 to 4 for better balance
+    position: [0, 5, 0], // Adjusted y-position to half the new height
     rotation: [0, 0, 0],
     type: 'runway'
   };
   structures.push(runway);
 
-  // Create central structures
-  for (let i = 0; i < 5; i++) {
-    const width = 8 + Math.random() * 12;
-    const height = 0.2;
-    const depth = 2 + Math.random() * 4;
+  // Add runway-style structures underneath - evenly distributed
+  for (let i = 0; i < 12; i++) {
+    const length = 20 + Math.random() * 25; // Scaled down: 20-45 units
+    const height = 4 + Math.random() * 2;
+    const width = 4 + Math.random() * 2;
     
-    const geometry = new THREE.BoxGeometry(width, height, depth);
-    // Alternate between left and right side of runway, further away
-    const side = i % 2 === 0 ? -1 : 1;
+    const geometry = new THREE.BoxGeometry(length, height, width);
     const position = [
-      -20 + i * 10, // Space them evenly along the runway
-      8 + i * 2, // Stack them slightly higher
-      12 * side // Position them 12 units away from the runway (increased from 4)
+      -75 + (i * 12.5), // Evenly distributed from -75 to 75
+      -10 - i * 2, // Staggered height
+      -5 + Math.random() * 10
     ];
     const rotation = [
-      Math.random() * Math.PI * 0.5, // Increased from 0.1 to 0.5 for more rotation on X axis
-      Math.random() * Math.PI * 0.5, // Increased from 0.1 to 0.5 for more rotation on Y axis
-      Math.random() * Math.PI * 0.5  // Increased from 0.2 to 0.5 for more rotation on Z axis
+      Math.random() * Math.PI * 0.1,
+      Math.random() * Math.PI * 0.2,
+      Math.random() * Math.PI * 0.1
     ];
     
-    structures.push({ geometry, position, rotation, type: 'central' });
+    structures.push({ 
+      geometry, 
+      position, 
+      rotation, 
+      type: 'runway_style' 
+    });
   }
 
   // Create left structures - balanced spread
   for (let i = 0; i < 15; i++) {
-    const width = 5 + Math.random() * 15;
+    const width = 5 + Math.random() * 10; // 5-15 units
     const height = 0.2;
     const depth = 1 + Math.random() * 3;
     
     const geometry = new THREE.BoxGeometry(width, height, depth);
     const position = [
-      -20 - Math.random() * 20,
-      2 + i * 2,
-      -20 + Math.random() * 40
+      -15 - Math.random() * 15, // -15 to -30
+      2 + i * 1.5, // 2 to 25
+      -15 + Math.random() * 30 // -15 to 15
     ];
     const rotation = [
       Math.random() * Math.PI * 0.2,
@@ -61,15 +64,15 @@ function createParametricStructures() {
 
   // Create right structures - balanced with left
   for (let i = 0; i < 15; i++) {
-    const width = 5 + Math.random() * 15;
+    const width = 5 + Math.random() * 10; // 5-15 units
     const height = 0.2;
     const depth = 1 + Math.random() * 3;
     
     const geometry = new THREE.BoxGeometry(width, height, depth);
     const position = [
-      20 + Math.random() * 20,
-      2 + i * 2,
-      -20 + Math.random() * 40
+      15 + Math.random() * 15, // 15 to 30
+      2 + i * 1.5, // 2 to 25
+      -15 + Math.random() * 30 // -15 to 15
     ];
     const rotation = [
       Math.random() * Math.PI * 0.2,
@@ -80,17 +83,69 @@ function createParametricStructures() {
     structures.push({ geometry, position, rotation, type: 'structure' });
   }
 
+  // Add thin structures on left side
+  for (let i = 0; i < 10; i++) {
+    const width = 10 + Math.random() * 20; // 10-30 units
+    const height = 0.15;
+    const depth = 0.8 + Math.random() * 1.2;
+    
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const position = [
+      -10 - Math.random() * 10, // -10 to -20
+      11, // Just above runway
+      -10 + Math.random() * 20 // -10 to 10
+    ];
+    const rotation = [
+      Math.random() * Math.PI * 0.1,
+      Math.random() * Math.PI * 0.15,
+      Math.random() * Math.PI * 0.1
+    ];
+    
+    structures.push({ 
+      geometry, 
+      position, 
+      rotation, 
+      type: 'thin_structure' 
+    });
+  }
+
+  // Add thin structures on right side
+  for (let i = 0; i < 10; i++) {
+    const width = 10 + Math.random() * 20; // 10-30 units
+    const height = 0.15;
+    const depth = 0.8 + Math.random() * 1.2;
+    
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const position = [
+      10 + Math.random() * 10, // 10 to 20
+      11, // Just above runway
+      -10 + Math.random() * 20 // -10 to 10
+    ];
+    const rotation = [
+      Math.random() * Math.PI * 0.1,
+      Math.random() * Math.PI * 0.15,
+      Math.random() * Math.PI * 0.1
+    ];
+    
+    structures.push({ 
+      geometry, 
+      position, 
+      rotation, 
+      type: 'thin_structure' 
+    });
+  }
+
   // Create overhead structures - balanced distribution
   for (let i = 0; i < 20; i++) {
-    const length = 20 + Math.random() * 40;
+    const length = 15 + Math.random() * 25; // 15-40 units
     const width = 0.2;
     const height = 0.1;
     
     const geometry = new THREE.BoxGeometry(length, height, width);
     const position = [
-      -30 + Math.random() * 60,
-      20 + Math.random() * 20,
-      -20 + Math.random() * 40
+      -50 + Math.random() * 100, // -50 to 50
+      20 + Math.random() * 20, // 20 to 40
+      -20 + Math.random() * 40 // -20 to 20
     ];
     const rotation = [
       Math.random() * Math.PI * 0.1,
@@ -101,65 +156,70 @@ function createParametricStructures() {
     structures.push({ geometry, position, rotation, type: 'overhead' });
   }
 
-  // Create underground structures - balanced distribution
+  // Create image-like structures around runway
+  const imageStructures = [
+    {
+      size: [15, 25, 0.2],
+      position: [0, 22, -10],
+      rotation: [0, 0, 0],
+    },
+    {
+      size: [20, 15, 0.2],
+      position: [-30, 18, 20],
+      rotation: [0, Math.PI * 0.2, 0],
+    },
+    {
+      size: [25, 20, 0.2],
+      position: [30, 20, 20],
+      rotation: [0, -Math.PI * 0.2, 0],
+    },
+    {
+      size: [15, 30, 0.2],
+      position: [0, 28, 20],
+      rotation: [Math.PI * 0.1, 0, 0],
+    }
+  ];
+
+  // Add image structures
+  imageStructures.forEach(({ size, position, rotation }) => {
+    const geometry = new THREE.BoxGeometry(size[0], size[1], size[2]);
+    structures.push({
+      geometry,
+      position,
+      rotation,
+      type: 'image'
+    });
+  });
+
+  // Add floating platforms with clustering near runway ends
   for (let i = 0; i < 20; i++) {
-    const length = 20 + Math.random() * 40;
-    const width = 0.2;
-    const height = 0.1;
+    const width = 8 + Math.random() * 12; // 8-20 units
+    const height = 0.3;
+    const depth = 2 + Math.random() * 6; // 2-8 units
     
-    const geometry = new THREE.BoxGeometry(length, height, width);
+    // Create clustering effect near runway ends
+    const xCluster = Math.random() < 0.6 ? 
+      (Math.random() < 0.5 ? -75 + Math.random() * 15 : 60 + Math.random() * 15) : // 60% chance near ends
+      -60 + Math.random() * 120; // 40% chance anywhere
+    
+    const geometry = new THREE.BoxGeometry(width, height, depth);
     const position = [
-      -30 + Math.random() * 60,
-      -10 - Math.random() * 20,
-      -20 + Math.random() * 40
+      xCluster,
+      5 + Math.random() * 15, // 5 to 20
+      -15 + Math.random() * 30 // -15 to 15
     ];
     const rotation = [
-      Math.random() * Math.PI * 0.1,
-      Math.random() * Math.PI * 2,
-      Math.random() * Math.PI * 0.1
+      Math.random() * Math.PI * 0.2,
+      Math.random() * Math.PI * 0.5,
+      Math.random() * Math.PI * 0.2
     ];
     
-    structures.push({ geometry, position, rotation, type: 'underground' });
-  }
-
-  // Create diagonal connecting structures - balanced distribution
-  for (let i = 0; i < 15; i++) {
-    const height = 15 + Math.random() * 10;
-    const width = 0.1;
-    
-    const geometry = new THREE.CylinderGeometry(width, width, height, 6);
-    const position = [
-      -30 + Math.random() * 60,
-      -5 + height/2,
-      -20 + Math.random() * 40
-    ];
-    const rotation = [
-      Math.random() * 0.5 - 0.25,
-      Math.random() * Math.PI * 2,
-      Math.random() * 0.5 - 0.25
-    ];
-    
-    structures.push({ geometry, position, rotation, type: 'connector' });
-  }
-
-  // Create vertical struts - balanced distribution
-  for (let i = 0; i < 15; i++) {
-    const height = 10 + Math.random() * 30;
-    const width = 0.1;
-    
-    const geometry = new THREE.CylinderGeometry(width, width, height, 6);
-    const position = [
-      -40 + i * 5,
-      5 + height/2,
-      -2 + Math.random() * 4
-    ];
-    const rotation = [
-      Math.random() * 0.2 - 0.1,
-      0,
-      Math.random() * 0.2 - 0.1
-    ];
-    
-    structures.push({ geometry, position, rotation, type: 'strut' });
+    structures.push({ 
+      geometry, 
+      position, 
+      rotation, 
+      type: 'platform' 
+    });
   }
 
   return structures;
@@ -197,12 +257,12 @@ function SimpleModel({ onSelect }) {
     walkProgress.current += 0.0008;
     if (walkProgress.current > 1) walkProgress.current = 0;
 
-    // Move model along runway
-    const x = -45 + walkProgress.current * 90;
+    // Move model along runway - adjusted for longer runway
+    const x = -145 + walkProgress.current * 290; // Adjusted range for longer runway (-145 to +145)
     group.current.position.x = x;
     
-    // Add more subtle bobbing motion - adjusted for new runway height
-    group.current.position.y = 8 + Math.sin(state.clock.elapsedTime * 2) * 0.05; // Adjusted to new runway height
+    // Add more subtle bobbing motion
+    group.current.position.y = 8 + Math.sin(state.clock.elapsedTime * 2) * 0.05;
 
     // Slower leg movement for graceful walk
     const legRotation = Math.sin(state.clock.elapsedTime * 2) * 0.2;
@@ -221,7 +281,7 @@ function SimpleModel({ onSelect }) {
   return (
     <group 
       ref={group} 
-      position={[0, 8, 0]} // Adjusted for new runway height
+      position={[0, 15, 0]} // Adjusted for new runway height
       rotation={[0, -Math.PI / 2, 0]}
       onClick={handleClick}
     >
@@ -265,13 +325,15 @@ function SimpleModel({ onSelect }) {
 
 function ParametricStructure({ geometry, position, rotation, type }) {
   const material = useMemo(() => {
-    if (type === 'runway') {
+    if (type === 'runway' || type === 'runway_style') {
       return new THREE.MeshStandardMaterial({
         color: 0xffffff,
         roughness: 0.2,
         metalness: 0.3,
         clearcoat: 0.5,
-        clearcoatRoughness: 0.2
+        clearcoatRoughness: 0.2,
+        transparent: type === 'runway_style',
+        opacity: type === 'runway_style' ? 0.8 : 1
       });
     }
     if (type === 'central') {
@@ -283,6 +345,40 @@ function ParametricStructure({ geometry, position, rotation, type }) {
         transparent: true,
         clearcoat: 0.9,
         clearcoatRoughness: 0.1
+      });
+    }
+    if (type === 'image') {
+      return new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        roughness: 0.1,
+        metalness: 0.8,
+        transmission: 0.5,
+        transparent: true,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        side: THREE.DoubleSide
+      });
+    }
+    if (type === 'stick' || type === 'diagonal_stick') {
+      return new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        roughness: 0.1,
+        metalness: 0.8,
+        transmission: 0.3,
+        transparent: true,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1
+      });
+    }
+    if (type === 'floating_stick' || type === 'curved_stick') {
+      return new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        roughness: 0.05,
+        metalness: 0.9,
+        transmission: 0.4,
+        transparent: true,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05
       });
     }
     return new THREE.MeshPhysicalMaterial({
@@ -329,45 +425,45 @@ function Scene({ onModelSelect }) {
         <ParametricStructure key={index} {...structure} />
       ))}
       
-      {/* Add walking model */}
+      {/* Add walking model with adjusted range */}
       <SimpleModel onSelect={onModelSelect} />
       
-      {/* Add spotlights along the runway */}
+      {/* Adjusted spotlights */}
       <spotLight
-        position={[0, 40, 0]}
+        position={[0, 35, 0]}
         angle={Math.PI / 4}
         penumbra={0.2}
         decay={1.2}
-        distance={120}
+        distance={100}
         intensity={2}
         castShadow
       />
       
       <spotLight
-        position={[-30, 30, -15]}
+        position={[-20, 25, -10]}
         angle={Math.PI / 6}
         penumbra={0.3}
         decay={1.2}
-        distance={100}
+        distance={80}
         intensity={1.5}
         castShadow
       />
 
       <spotLight
-        position={[30, 30, 15]}
+        position={[20, 25, 10]}
         angle={Math.PI / 6}
         penumbra={0.3}
         decay={1.2}
-        distance={100}
+        distance={80}
         intensity={1.5}
         castShadow
       />
       
-      {/* Add point lights for additional highlights */}
-      <pointLight position={[-20, 15, 0]} intensity={1} />
-      <pointLight position={[20, 15, 0]} intensity={1} />
-      <pointLight position={[0, 20, -20]} intensity={1} />
-      <pointLight position={[0, 20, 20]} intensity={1} />
+      {/* Adjusted point lights */}
+      <pointLight position={[-15, 12, 0]} intensity={1} />
+      <pointLight position={[15, 12, 0]} intensity={1} />
+      <pointLight position={[0, 15, -15]} intensity={1} />
+      <pointLight position={[0, 15, 15]} intensity={1} />
     </group>
   );
 }
